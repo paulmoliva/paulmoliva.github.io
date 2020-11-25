@@ -11,7 +11,7 @@ function App() {
   let [selectedPlayer, setSelectedPlayer] = useState(null);
   const [options, setOptions] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
-  const [showRules, setShowRules] = useState(false);
+  const [showRules, setShowRules] = useState(true);
   const [showBoard, setShowBoard] = useState(false);
 
   const onSearch = (searchText) => {
@@ -22,6 +22,8 @@ function App() {
   };
 
   function onSelect(player) {
+    setShowRules(false);
+    setShowBoard(false);
     setSelectedPlayer(player);
     setSearchTerm('');
   }
@@ -78,10 +80,12 @@ function App() {
 
   function renderRules() {
     return (
-      <iframe
-        src="https://docs.google.com/document/d/e/2PACX-1vQrM4aZhQ4rqz8Z8r4ZKa9uu1qAJA8upOWyORyVhfPyVuzSb-jSJDjQ8NXtUuF329C0vFYIRltS2pHw/pub?embedded=true"
-        style={{width: '90vh', height: '95vh'}}
-      ></iframe>
+      <div style={{height: '100vh', width: '100vh',margin: '0 auto'}}>
+        <iframe
+          src="https://docs.google.com/document/d/e/2PACX-1vQrM4aZhQ4rqz8Z8r4ZKa9uu1qAJA8upOWyORyVhfPyVuzSb-jSJDjQ8NXtUuF329C0vFYIRltS2pHw/pub?embedded=true"
+          style={{minWidth: '100%', minHeight: '100%'}}
+        ></iframe>
+      </div>
     )
   }
 
@@ -90,6 +94,11 @@ function App() {
       <div style={{height: '90vh', width: '90vw', overflow: 'hidden', margin: '0 auto'}}>
         <iframe src={'https://docs.google.com/presentation/d/1jmTqB1F631Ttg19ljCt6Rr5ifdRqxTnfRGuFz554MAI/edit?usp=sharing'}
         style={{top: '-105px', left: '-222px', minWidth: '100%', minHeight: '100%', position: 'relative'}}></iframe>
+        <p style={{position: 'fixed', bottom: '0px'}}>
+          Can't see the board? <a href={'https://docs.google.com/presentation/d/1jmTqB1F631Ttg19ljCt6Rr5ifdRqxTnfRGuFz554MAI/edit#slide=id.p'} target={'_blank'}>
+          Click here instead
+          </a>
+        </p>
       </div>
     )
   }
@@ -97,23 +106,23 @@ function App() {
   return (
     <Layout theme={'dark'} style={{minHeight: '100vh'}}>
       <Header>
-        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
-          <AutoComplete
-            style={{ width: 200 }}
-            options={getPlayerNames()}
-            onSelect={onSelect}
-            placeholder="Enter a player name"
-            filterOption={(inputValue, option) =>
-              option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
-            }
-            value={searchTerm}
-            onChange={setSearchTerm}
-          />
+        <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['1']}>
           <Menu.Item key="1" onClick={rulesOnClick}>Rules</Menu.Item>
           <Menu.Item key="2" onClick={boardOnClick}>Board</Menu.Item>
         </Menu>
       </Header>
       <Content>
+        <AutoComplete
+          style={{ width: 200 }}
+          options={getPlayerNames()}
+          onSelect={onSelect}
+          placeholder="Enter a player name"
+          filterOption={(inputValue, option) =>
+            option.value.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+          }
+          value={searchTerm}
+          onChange={setSearchTerm}
+        />
         <div className="App">
           {selectedPlayer && showCharacter(selectedPlayer)}
           {showRules && renderRules()}
