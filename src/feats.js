@@ -152,7 +152,7 @@ export const players = {
       AUSTIN,
       2,
       2,
-      [TALL, ATHLETIC, FEAT_NAMES.GOOD_HANDS, SNEAKY]
+      [TALL, ATHLETIC, FEAT_NAMES.GOOD_HANDS, SNEAKY, FEAT_NAMES.LOCKED]
     ),
     [BENJAMIN]: new Player(
       BENJAMIN,

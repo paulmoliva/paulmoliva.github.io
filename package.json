@@ -15,7 +15,7 @@
   },
   "scripts": {
     "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start",
-    "build": "react-scripts build",
+    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build && echo 'turkeybowl2020.com' > ./build/CNAME",
     "test": "SKIP_PREFLIGHT_CHECK=true react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "SKIP_PREFLIGHT_CHECK=true npm run build",
